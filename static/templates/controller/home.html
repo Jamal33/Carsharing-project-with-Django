@@ -1,0 +1,104 @@
+<div class="maincontent">
+
+    <h1>Home<span ng-if="showSpinner"> <i class="fa fa-spinner fa-spin"></i></span></h1>
+    <br/>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Welcome to Hitchcar</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <h4>I'm a passenger</h4>
+                            <br />
+                            <ul class="center-list">
+                                <li>Search for a driver.</li>
+                                <li>Request the driver to pick you up</li>
+                            </ul>
+                            <br />
+                            <a class="btn btn-success btn-block" ng-click="searchRide()">Search a driver</a>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
+                            <h4>I'm a driver</h4>
+                            <br />
+                            <ul class="center-list">
+                                <li>Share your car with others</li>
+                                <li>Receive pickup requests</li>
+                            </ul>
+                            <br />
+                            <a class="btn btn-success btn-block" ng-click="startNewRide()">Start a new ride</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">My active Rides</h3>
+                </div>
+                <div class="panel-body">
+                    <div ng-if="!myActiveRides || myActiveRides.length === 0" class="alert alert-warning">
+                        You have no active Rides at this moment.
+                    </div>
+                    <div ng-repeat="ride in myActiveRides">
+                        <div class="well">
+                            <p>
+                                Started at {{ ride.startTime | date : 'dd.MM.yyyy HH:mm' }}
+                                <br/>
+                                From <a href="{{getMapUrl(ride.rideStart)}}" target="_blank" >{{ ride.rideStart.title }}</a>
+                                <br/>
+                                To <a href="{{getMapUrl(ride.rideDestination)}}" target="_blank" >{{ ride.rideDestination.title }}</a>
+                            </p>
+                            <button class="btn btn-primary btn-block" ng-click="openRide(ride.id)">Show ride details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">My active Pick Up Requests</h3>
+                </div>
+                <div class="panel-body">
+                    <div ng-if="!myActiveRequests || myActiveRequests.length === 0" class="alert alert-warning">
+                        You have no active Pick Up Requests at this moment.
+                    </div>
+                    <div ng-repeat="request in myActiveRequests">
+                        <div class="well">
+                            <div ng-if="!request.answered" class="alert alert-warning">
+                                Driver has not answered yet.
+                            </div>
+                            <div ng-if="request.answered">
+                                <div ng-if="!request.accepted" class="alert alert-danger">
+                                    Driver has rejected your request.
+                                </div>
+                                <div ng-if="request.accepted" class="alert alert-success">
+                                    Driver has accepted your request.
+                                </div>
+                            </div>
+                            <p>
+                                PickUp Request {{ request.id }}
+                                <br/>
+                                For ride: {{request.ride}}
+                                <br/>
+                                From <a href="{{getMapUrl(request.currentLocation)}}" target="_blank" >{{ request.currentLocation.title }}</a>
+                                <br/>
+                                To <a href="{{getMapUrl(request.destination)}}" target="_blank" >{{ request.destination.title }}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

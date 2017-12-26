@@ -1,0 +1,46 @@
+<div id="rideModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ride information</h4>
+            </div>
+            <div class="modal-body">
+                <p>User started this ride at {{ selectedRide.startTime | date : 'dd.MM.yyyy HH:mm' }}</p>
+                <p>
+                    From <a href="{{getMapUrl(ride.rideStart)}}" target="_blank" >{{selectedRide.rideStart.title}}</a>
+                </p>
+                <p>
+                    via waypoints:
+                    <ul>
+                        <li ng-if="selectedRide.waypoints.length === 0">
+                            No waypoints reached yet
+                        </li>
+                        <li ng-repeat="waypoint in selectedRide.waypoints">
+                            <a href="{{getMapUrl(waypoint.waypointLocation)}}" target="_blank" >
+                                {{waypoint.waypointLocation.title}} (at {{ waypoint.timestamp | date : 'dd.MM.yyyy HH:mm' }})
+                            </a>
+                        </li>
+                    </ul>
+                </p>
+                <p>
+                    to destination <a href="{{getMapUrl(ride.rideDestination)}}" target="_blank" >{{selectedRide.rideDestination.title}}</a>
+                </p>
+
+                <br/>
+                <h4 class="left">Send PickUp request to this driver?</h4>
+                <p>Whats your destination?</p>
+                <input id="pac-input" class="controls form-control" type="text" placeholder="Search destination">
+                <br/>
+                <p>
+                    Selected destination: {{tmpRequestData.destination?tmpRequestData.destination.title:'none'}}
+                    <span ng-if="tmpRequestData.destination"> <button type="button" ng-click="tmpRequestData.destination = undefined" class="btn btn-default btn-sm"><i class="fa fa-trash"></i></button></span>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <span ng-if="showSpinner"><i class="fa fa-spinner fa-spin"></i></span>
+                <button type="button" class="btn btn-primary" ng-click="sendPickUpRequest(selectedRide, tmpRequestData)" ng-disabled="showSpinner || !tmpRequestData.destination">Send PickUp Request</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

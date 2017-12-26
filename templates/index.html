@@ -1,0 +1,73 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>HitchCar</title>
+
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
+    <link rel="stylesheet" href="{% static "css/bootstrap-theme.min.css" %}" />
+    <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}" />
+    <link rel="stylesheet" href="{% static "css/custom.css" %}" type="text/css" />
+
+</head>
+<body ng-app="hitchcar" ng-controller="authCtrl" ng-class="{isMapView:isMapView()}">
+
+<img id="hitchcar-logo" alt="Hitchcar" src="{% static "images/hitchcar.png" %}">
+<!-- Content -->
+<div data-ui-view></div>
+<!-- Content -->
+
+<script async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyCp-Q3tQa6K5vig-0pQkBO1Y5aZWHUYHhc&libraries=places"></script>
+
+<!-- jQuery -->
+<script src="{% static "lib/jquery/jquery-3.2.1.min.js" %}"></script>
+
+<!-- JS for Bootstrap -->
+<script src="{% static "lib/bootstrap/bootstrap.min.js" %}"></script>
+
+<!-- AngularJS -->
+<script src="{% static "lib/angular/angular.min.js" %}"></script>
+<script src="{% static "lib/angular/angular-animate.min.js" %}"></script>
+<script src="{% static "lib/angular/angular-aria.min.js" %}"></script>
+<script src="{% static "lib/angular/angular-cookies.min.js" %}"></script>
+<script src="{% static "lib/angular/angular-loader.min.js" %}"></script>
+<script src="{% static "lib/angular/angular-messages.min.js" %}"></script>
+<script src="{% static "lib/angular/angular-resource.min.js" %}"></script>
+<script src="{% static "lib/angular/angular-route.min.js" %}"></script>
+<script src="{% static "lib/angular/angular-sanitize.min.js" %}"></script>
+<script src="{% static "lib/angular/angular-touch.min.js" %}"></script>
+<script src="{% static "lib/angular/angular-ui-router.min.js" %}"></script>
+
+<!-- AngularJS APP -->
+<script src="{% static "js/app.js" %}"></script>
+
+<!-- AngularJS Services -->
+<script src="{% static "js/services/authService.js" %}"></script>
+<script src="{% static "js/services/dataService.js" %}"></script>
+<script src="{% static "js/services/locationService.js" %}"></script>
+
+<!-- AngularJS Directives -->
+
+<!-- AngularJS Interceptors -->
+<script src="{% static "js/interceptors/authInterceptor.js" %}"></script>
+
+<!-- AngularJS Controllers -->
+<script src="{% static "js/controller/authCtrl.js" %}"></script>
+<script src="{% static "js/controller/homeCtrl.js" %}"></script>
+<script src="{% static "js/controller/loginCtrl.js" %}"></script>
+<script src="{% static "js/controller/logoutCtrl.js" %}"></script>
+<script src="{% static "js/controller/mapCtrl.js" %}"></script>
+<script src="{% static "js/controller/navigationCtrl.js" %}"></script>
+<script src="{% static "js/controller/pNavigationCtrl.js" %}"></script>
+<script src="{% static "js/controller/profileCtrl.js" %}"></script>
+<script src="{% static "js/controller/registerCtrl.js" %}"></script>
+<script src="{% static "js/controller/rideCtrl.js" %}"></script>
+<script src="{% static "js/controller/routesCtrl.js" %}"></script>
+<!-- endbuild -->
+
+</body>
+</html>

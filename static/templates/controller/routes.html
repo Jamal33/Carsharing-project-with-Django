@@ -1,0 +1,95 @@
+<div class="maincontent">
+
+    <h1>My Trips<span ng-if="showSpinner"> <i class="fa fa-spinner fa-spin"></i></span></h1>
+    <br/>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Manage your trips</h3>
+                </div>
+                <div class="panel-body">
+                    <h4>Start a trip</h4>
+                    <p>
+                        <ul class="center-list">
+                            <li>Share your car with others</li>
+                            <li>Receive pickup requests</li>
+                        </ul>
+                    </p>
+                    <br/>
+                    <a class="btn btn-success btn-block" ng-click="openNewRideModal()">Start a new ride</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <div id="hitchcar-image"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Past trips</h3>
+                </div>
+                <div class="panel-body">
+                    <div ng-if="!pastRides || pastRides.length === 0" class="alert alert-warning">
+                        You have no past Trips.
+                    </div>
+                    <table class="table" ng-if="pastRides.length > 0">
+                        <tr>
+                            <th>Date</th>
+                            <th>From</th>
+                            <th>To</th>
+                        </tr>
+                        <tr ng-repeat="pr in pastRides">
+                            <td>{{ pr.startTime | date: "dd.MM.y" }}</td>
+                            <td><a href="https://www.google.com/maps/?q={{ pr.rideStart.latitude }},{{ pr.rideStart.longitude }}" target="_blank" >{{ pr.rideStart.title }}</a></td>
+                            <td><a href="https://www.google.com/maps/?q={{ pr.rideDestination.latitude }},{{ pr.rideDestination.longitude }}" target="_blank" >{{ pr.rideDestination.title }}</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Past PickUp Requests</h3>
+                </div>
+                    <div class="panel-body">
+                        <div ng-if="!myPastRequests || myPastRequests.length === 0" class="alert alert-warning">
+                            You have no past PickUp Requests at this moment.
+                        </div>
+                        <table class="table" ng-if="myPastRequests.length > 0">
+                            <tr>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>State</th>
+                            </tr>
+                            <tr ng-repeat="request in myPastRequests">
+                                <td><a href="{{getMapUrl(request.currentLocation)}}" target="_blank" >{{ request.currentLocation.title }}</a></td>
+                                <td><a href="{{getMapUrl(request.destination)}}" target="_blank" >{{ request.destination.title }}</a></td>
+                                <td>
+                                    <span ng-if="!request.answered" class="label label-warning">
+                                        No Response
+                                    </span>
+                                    <span ng-if="request.answered">
+                                        <span ng-if="!request.accepted" class="label label-danger">
+                                            Rejected
+                                        </span>
+                                        <span ng-if="request.accepted" class="label label-success">
+                                            Accepted
+                                        </span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+               </div>
+        </div>
+    </div>
+
+    <div ng-include="'static/templates/modals/startTripModal.html'"></div>
+
+</div>

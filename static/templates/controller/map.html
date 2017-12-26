@@ -1,0 +1,51 @@
+<div id="map-container" class="maincontent">
+    <div id="map"></div>
+    <div id="map-widget">
+        <div class="panel-group" id="mapAccordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingByStart">
+                    <h3 class="panel-title">
+                        <span role="button" data-toggle="collapse" data-parent="#mapAccordion" href="#collapseByStart" aria-expanded="true" aria-controls="collapseByStart">Filter by Start</span>
+                    </h3>
+                </div>
+                <div id="collapseByStart" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingByStart">
+                    <div class="panel-body">
+                        <div ng-repeat="route in routes | orderBy : 'ride.rideStart.title'">
+                            <span ng-if="showSpinner">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </span>
+                            <div ng-if="!showSpinner">
+                                <label>
+                                    <input type="checkbox" ng-model="route.shown" ng-change="hideOrDisplayRoute(route)"> {{route.ride.rideStart.title}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingByDestination">
+                    <h3 class="panel-title">
+                        <span role="button" data-toggle="collapse" data-parent="#mapAccordion" href="#collapseByDestination" aria-expanded="true" aria-controls="collapseByDestination">Filter by Destination</span>
+                    </h3>
+                </div>
+                <div id="collapseByDestination" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingByDestination">
+                    <div class="panel-body">
+                        <div ng-repeat="route in routes | orderBy : 'ride.rideDestination.title'">
+                            <span ng-if="showSpinner">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </span>
+                            <div ng-if="!showSpinner">
+                                <label>
+                                    <input type="checkbox" ng-model="route.shown" ng-change="hideOrDisplayRoute(route)"> {{route.ride.rideDestination.title}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'static/templates/modals/rideModal.html'"></div>

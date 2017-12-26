@@ -1,0 +1,8 @@
+deployment/
+env/
+.dockerignore
+.gitignore
+.git/
+db.sqlite3
+Dockerfile
+README.md

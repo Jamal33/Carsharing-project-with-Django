@@ -1,0 +1,18 @@
+<div id="startTripModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">What's your destination?</h4>
+            </div>
+            <div class="modal-body" id="search-map-container">
+                <input id="pac-input" class="controls" type="text" placeholder="Search destination">
+                <div id="searchMap"></div>
+            </div>
+            <div class="modal-footer">
+                <span ng-if="showSpinner"><i class="fa fa-spinner fa-spin"></i></span>
+                <button type="button" class="btn btn-primary" ng-click="startRide()" ng-disabled="!canStartRide() || showSpinner">Start trip</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
